@@ -7,10 +7,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class WhiskyApiApplicationTests {
-
+public class WihskyApiApplicationTests {
+	
 	@Test
 	public void contextLoads() {
+		
 	}
 
 }
