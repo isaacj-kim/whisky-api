@@ -5,36 +5,32 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-public class WhiskyType {
-
-	
+public class WhiskyLabel {
 	
 	@Id
 	@GeneratedValue
 	private Long id;
 	
-	private String name;
-	
+	private String labelName;
 	
 	
 	@SuppressWarnings("unused")
-	private WhiskyType() {
+	private WhiskyLabel() {
 		
 	}
-	public WhiskyType(String name) {
-		this.name = name;
+
+	public WhiskyLabel(String labelName) {
+	this.labelName = labelName;
 	}
 	
 	public Long getId() {
 		return id;
 	}
-	
-	
-	public String getName() {
-		return name;
+
+	public String getLabelName() {
+		return labelName;
 	}
-	
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -51,7 +47,7 @@ public class WhiskyType {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		WhiskyType other = (WhiskyType) obj;
+		WhiskyLabel other = (WhiskyLabel) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -59,9 +55,7 @@ public class WhiskyType {
 			return false;
 		return true;
 	}
-	public void addBrand(String string) {
-		// TODO Auto-generated method stub
-		
-	}
-
 }
+
+
+
