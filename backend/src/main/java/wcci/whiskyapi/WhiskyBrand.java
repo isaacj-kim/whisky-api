@@ -1,10 +1,16 @@
 package wcci.whiskyapi;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 public class WhiskyBrand {
@@ -14,14 +20,21 @@ public class WhiskyBrand {
 	@GeneratedValue
 	private Long id;
 	
+	@ManyToOne
+	@JsonIgnore
+	private WhiskyType whiskyType;
+	
+	
+	
+	@OneToMany(mappedBy = "whiskyBrand")
+	private Collection<WhiskyLabel> whiskyLabels;
+	
 	
 	private String brandName;
 
 
-	private Collection<WhiskyLabel> whiskyLabels;
 
 
-	private WhiskyType whiskyType;
 	
 	@SuppressWarnings("unused")
 	private WhiskyBrand() {
@@ -31,6 +44,7 @@ public class WhiskyBrand {
 	public WhiskyBrand(String brandName, WhiskyType whiskyType) {
 		this.brandName = brandName;
 		this.whiskyType = whiskyType;
+		this.whiskyLabels = new ArrayList<>();
 	}
 	
 	public String getBrandName() {
@@ -41,6 +55,9 @@ public class WhiskyBrand {
 	}
 	public WhiskyType getWhiskyType() {
 		return whiskyType;
+	}
+	public void addWhiskyType(WhiskyType whiskyType) {
+		this.whiskyType = whiskyType;
 	}
 	
 	public void addLabel(WhiskyLabel whiskyLabel) {
