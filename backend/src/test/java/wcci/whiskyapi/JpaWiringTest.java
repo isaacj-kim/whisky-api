@@ -47,7 +47,7 @@ public class JpaWiringTest {
 		WhiskyType testWhiskyType = new WhiskyType("Irish Whisky");
 		testWhiskyType = whiskyTypeRepo.save(testWhiskyType);
 		WhiskyBrand testWhiskyBrand = new WhiskyBrand("Proper 12", whiskyType);
-		testWhiskyBrand = whiskyBrandRepo.save(testWhiskyBrand);
+		testWhiskyBrand.addWhiskyType(testWhiskyType);
 		WhiskyLabel testWhiskyLabel = new WhiskyLabel("Proper Black");
 		testWhiskyLabel = whiskyLabelRepo.save(testWhiskyLabel);
 
