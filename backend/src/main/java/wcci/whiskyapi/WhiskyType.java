@@ -1,8 +1,12 @@
 package wcci.whiskyapi;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class WhiskyType {
@@ -12,6 +16,11 @@ public class WhiskyType {
 	@Id
 	@GeneratedValue
 	private Long id;
+	
+	@OneToMany(mappedBy = "whiskyType")
+	private Collection<WhiskyBrand> whiskyBrands;
+	
+	
 	
 	private String name;
 	
@@ -23,6 +32,7 @@ public class WhiskyType {
 	}
 	public WhiskyType(String name) {
 		this.name = name;
+		this.whiskyBrands = new ArrayList<>();
 	}
 	
 	public Long getId() {
@@ -32,7 +42,7 @@ public class WhiskyType {
 	public String getName() {
 		return name;
 	}
-	public void addBrand(String string) {
+	public void addBrand(WhiskyBrand whiskyBrandName) {
 		
 	}
 	
