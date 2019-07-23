@@ -22,6 +22,10 @@ build/
 *.ipr
 out/
 
+# Parcel related files
+dist/
+.cache/
+
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/
@@ -31,3 +35,6 @@ out/
 
 ### VS Code ###
 .vscode/
+
+.gitignore
+/node_modules
