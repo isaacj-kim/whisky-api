@@ -29,6 +29,7 @@ public class JpaWiringTest {
 	WhiskyLabelRepository whiskyLabelRepo;
 
 	private WhiskyType whiskyType;
+	private WhiskyBrand whiskyBrand;
 	
 //	private WhiskyBrand testWhiskyBrand = new WhiskyBrand("Proper 12", testWhiskyType);
 //	private WhiskyLabel testWhiskyLabel = new WhiskyLabel("Proper Black");
@@ -48,7 +49,7 @@ public class JpaWiringTest {
 		testWhiskyType = whiskyTypeRepo.save(testWhiskyType);
 		WhiskyBrand testWhiskyBrand = new WhiskyBrand("Proper 12", whiskyType);
 		testWhiskyBrand.addWhiskyType(testWhiskyType);
-		WhiskyLabel testWhiskyLabel = new WhiskyLabel("Proper Black");
+		WhiskyLabel testWhiskyLabel = new WhiskyLabel("Proper Black", whiskyBrand);
 		testWhiskyLabel = whiskyLabelRepo.save(testWhiskyLabel);
 
 		testWhiskyType.addBrand(testWhiskyBrand);

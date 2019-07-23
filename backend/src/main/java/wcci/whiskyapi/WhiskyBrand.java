@@ -32,9 +32,6 @@ public class WhiskyBrand {
 	
 	private String brandName;
 
-
-
-
 	
 	@SuppressWarnings("unused")
 	private WhiskyBrand() {
