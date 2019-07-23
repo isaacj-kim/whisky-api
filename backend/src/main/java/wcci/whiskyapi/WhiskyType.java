@@ -20,8 +20,6 @@ public class WhiskyType {
 	@OneToMany(mappedBy = "whiskyType")
 	private Collection<WhiskyBrand> whiskyBrands;
 	
-	
-	
 	private String name;
 	
 	

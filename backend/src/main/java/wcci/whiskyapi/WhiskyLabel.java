@@ -26,8 +26,9 @@ public class WhiskyLabel {
 		
 	}
 
-	public WhiskyLabel(String labelName) {
-	this.labelName = labelName;
+	public WhiskyLabel(String labelName, WhiskyBrand whiskyBrand) {
+	this.whiskyBrand = whiskyBrand;
+		this.labelName = labelName;
 	}
 	
 	public Long getId() {
