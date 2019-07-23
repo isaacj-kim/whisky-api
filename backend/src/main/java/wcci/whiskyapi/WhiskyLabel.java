@@ -7,6 +7,9 @@ import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+
+
+//Maybe change it to blends
 @Entity
 public class WhiskyLabel {
 	
@@ -26,8 +29,9 @@ public class WhiskyLabel {
 		
 	}
 
-	public WhiskyLabel(String labelName) {
+	public WhiskyLabel(String labelName, WhiskyBrand whiskyBrand) {
 	this.labelName = labelName;
+	this.whiskyBrand = whiskyBrand;
 	}
 	
 	public Long getId() {
