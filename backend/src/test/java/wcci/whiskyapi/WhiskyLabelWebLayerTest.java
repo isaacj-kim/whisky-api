@@ -1,11 +1,11 @@
 package wcci.whiskyapi;
 
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
 
 import java.util.Collections;
 import java.util.Optional;
@@ -61,7 +61,7 @@ public class WhiskyLabelWebLayerTest {
 	@Test
 	public void addLabel() throws Exception {
 		WhiskyLabel labelToAdd = new WhiskyLabel("", whiskyBrand);
-		mockMvc.perform(post("/api/add-label").contentType(MediaType.APPLICATION_JSON).content(toJson(labelToAdd)))
+		mockMvc.perform(post("/api/add-labels").contentType(MediaType.APPLICATION_JSON).content(toJson(labelToAdd)))
 				.andExpect(status().isOk());
 	}
 

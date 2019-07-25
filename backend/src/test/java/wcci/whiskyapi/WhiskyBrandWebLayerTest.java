@@ -60,7 +60,7 @@ public class WhiskyBrandWebLayerTest {
 	@Test
 	public void addBrand() throws Exception {
 		WhiskyBrand whiskyBrandToAdd = new WhiskyBrand("", whiskyType);
-		mockMvc.perform(post("/api/add-brand").contentType(MediaType.APPLICATION_JSON).content(toJson(whiskyBrandToAdd)))
+		mockMvc.perform(post("/api/add-brands").contentType(MediaType.APPLICATION_JSON).content(toJson(whiskyBrandToAdd)))
 				.andExpect(status().isOk());
 	}
 
