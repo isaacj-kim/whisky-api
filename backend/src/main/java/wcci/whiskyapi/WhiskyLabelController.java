@@ -28,8 +28,8 @@ public class WhiskyLabelController {
 	}
 
 	@PostMapping ("/add-labels")
-	public WhiskyLabel addLabels () {
-		WhiskyLabel labelToAdd = new WhiskyLabel("", whiskyBrand);
+	public WhiskyLabel addLabels (String labelName) {
+		WhiskyLabel labelToAdd = new WhiskyLabel(labelName, whiskyBrand);
 		if(whiskyLabelRepo.findByLabelName(labelToAdd.getLabelName())==null){
 			whiskyLabelRepo.save(labelToAdd);
 		}

@@ -28,8 +28,8 @@ public class WhiskyBrandController {
 		}
 
 		@PostMapping ("/add-brands")
-		public WhiskyBrand addWhiskyBrand() {
-			WhiskyBrand whiskyBrandToAdd = new WhiskyBrand("", whiskyType);
+		public WhiskyBrand addWhiskyBrand(String brandName) {
+			WhiskyBrand whiskyBrandToAdd = new WhiskyBrand(brandName, whiskyType);
 			if (whiskyBrandRepo.findByBrandName(whiskyBrandToAdd.getBrandName())==null) {
 				whiskyBrandRepo.save(whiskyBrandToAdd);
 			}

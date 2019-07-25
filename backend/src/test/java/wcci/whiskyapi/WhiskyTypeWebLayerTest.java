@@ -20,7 +20,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-@WebMvcTest(WhiskyType.class)
+@WebMvcTest(WhiskyTypeController.class)
 @RunWith(SpringRunner.class)
 public class WhiskyTypeWebLayerTest {
 
@@ -41,7 +41,7 @@ public class WhiskyTypeWebLayerTest {
 	@Test
 	public void fetchCollectionOfWhiskyTypes() throws Exception {
 		when(whiskyTypeRepo.findAll()).thenReturn(Collections.singletonList(testWhiskyType));
-		mockMvc.perform(get("api/types"))
+		mockMvc.perform(get("/api/types"))
 		.andDo(print())
 		.andExpect(status().isOk())
 		.andExpect(content().contentType("application/json;charset=UTF-8"))
@@ -51,7 +51,7 @@ public class WhiskyTypeWebLayerTest {
 	@Test
 	public void fetchSingleWhiskyTypes() throws Exception {
 		when(whiskyTypeRepo.findById(1L)).thenReturn(Optional.of(testWhiskyType));
-		mockMvc.perform(get("api/types/1"))
+		mockMvc.perform(get("/api/types/1"))
 		.andDo(print())
 		.andExpect(status().isOk())
 		.andExpect(content().contentType("application/json;charset=UTF-8"))
