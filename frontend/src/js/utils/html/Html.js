@@ -1,7 +1,7 @@
 export default function () {
-  return new html();
+  return new Html();
 }
-  class html {
+  class Html {
     addAttribute(attributeToSet, attributeValue) {
       this.element.setAttribute(attributeToSet, attributeValue);
   

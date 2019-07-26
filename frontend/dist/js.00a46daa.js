@@ -117,7 +117,7 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"js/utils/html/html.js":[function(require,module,exports) {
+})({"js/utils/html/Html.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -132,17 +132,17 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 function _default() {
-  return new html();
+  return new Html();
 }
 
-var html =
+var Html =
 /*#__PURE__*/
 function () {
-  function html() {
-    _classCallCheck(this, html);
+  function Html() {
+    _classCallCheck(this, Html);
   }
 
-  _createClass(html, [{
+  _createClass(Html, [{
     key: "addAttribute",
     value: function addAttribute(attributeToSet, attributeValue) {
       this.element.setAttribute(attributeToSet, attributeValue);
@@ -237,7 +237,7 @@ function () {
     }
   }]);
 
-  return html;
+  return Html;
 }();
 },{}],"js/utils/api/Api.js":[function(require,module,exports) {
 "use strict";
@@ -16331,7 +16331,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _html = _interopRequireDefault(require("../html/html"));
+var _Html = _interopRequireDefault(require("../html/Html"));
 
 var _Api = _interopRequireDefault(require("../api/Api"));
 
@@ -16361,26 +16361,26 @@ function () {
   _createClass(Components, [{
     key: "getAppContext",
     value: function getAppContext() {
-      return (0, _html.default)().select("#app");
+      return (0, _Html.default)().select("#app");
     }
   }, {
     key: "renderWrapperDiv",
     value: function renderWrapperDiv() {
-      return (0, _html.default)().create("div").addClass("wrapper");
+      return (0, _Html.default)().create("div").addClass("wrapper");
     }
   }, {
     key: "renderContainerDiv",
     value: function renderContainerDiv() {
-      return (0, _html.default)().create('div').addClass('container');
+      return (0, _Html.default)().create('div').addClass('container');
     }
   }, {
     key: "renderMainHeader",
     value: function renderMainHeader() {
-      var mainHeader = (0, _html.default)().create("header");
-      var mainHeaderTitle = (0, _html.default)().create("h1").addClass("page-title").text("Whisky Aficionado");
-      var nav = this.renderMainNav();
+      var mainHeader = (0, _Html.default)().create("header");
+      var mainHeaderTitle = (0, _Html.default)().create("h1").addClass("page-title").text("Whisky Aficionado");
+      var headerNav = this.renderMainNav();
       mainHeader.addChild(mainHeaderTitle);
-      mainHeader.addChild(nav);
+      mainHeader.addChild(headerNav);
       return mainHeader;
     }
   }, {
@@ -16388,38 +16388,97 @@ function () {
     value: function renderMainNav() {
       var _this = this;
 
-      var headerNav = (0, _html.default)().create("nav");
-      var headerNavList = (0, _html.default)().create('ul').addClass('nav-list');
-      var headerNavListItem1 = (0, _html.default)().create('li').addClass('nav-list-item').addChild((0, _html.default)().create("a").addAttribute("href", "").text("Home").click(function (event) {
+      var headerNav = (0, _Html.default)().create("nav");
+      var headerNavList = (0, _Html.default)().create('ul').addClass('nav-list');
+      var headerNavListItemOne = (0, _Html.default)().create('li').addClass('nav-list-item').addChild((0, _Html.default)().create("a").addAttribute("href", "").text("Home").click(function (event) {
         event.preventDefault();
 
         _this.renderPageHome();
       }));
-      var headerNavListItem2 = (0, _html.default)().create('li').addClass('nav-list-item').addChild((0, _html.default)().create("a").addAttribute("href", "").text("Types").click(function (event) {
+      var headerNavListItemTwo = (0, _Html.default)().create('li').addClass('nav-list-item').addChild((0, _Html.default)().create("a").addAttribute("href", "").text("Types").click(function (event) {
         event.preventDefault();
 
         _this.renderTypesPage();
       }));
-      var headerNavListItem3 = (0, _html.default)().create('li').addClass('nav-list-item').addChild((0, _html.default)().create("a").addAttribute("href", "").text("Brands").click(function (event) {
+      var headerNavListItemThree = (0, _Html.default)().create('li').addClass('nav-list-item').addChild((0, _Html.default)().create("a").addAttribute("href", "").text("Brands").click(function (event) {
         event.preventDefault();
 
         _this.renderBrandsPage();
-
-        headerNavList.addChild(headerNavListItem1);
-        headerNavList.addChild(headerNavListItem2);
-        headerNavList.addChild(headerNavListItem3);
-        headerNav.addChild(headerNavList);
       }));
+      headerNavList.addChild(headerNavListItemOne);
+      headerNavList.addChild(headerNavListItemTwo);
+      headerNavList.addChild(headerNavListItemThree);
+      headerNav.addChild(headerNavList);
+      return headerNav;
+    }
+  }, {
+    key: "renderContentBlock",
+    value: function renderContentBlock(requestedData) {
+      var _this2 = this;
+
+      var contentBlock = (0, _Html.default)().create("section").addClass("content-block");
+      var contentBlockTitle = (0, _Html.default)().create("h3").addClass("content-block__title").text(requestedData);
+      var contentBlockList = (0, _Html.default)().create("ul").addClass("content-block__list");
+      (0, _Api.default)().getRequest("http://localhost:8080/api/".concat(requestedData), function (responseCollection) {
+        responseCollection.forEach(function (item) {
+          var elementName;
+
+          if (item.name) {
+            elementName = item.name;
+          } else if (item.brandName) {
+            elementName = item.brandName;
+          } else {
+            elementName = item.labelName;
+          }
+
+          var contentBlockListItem = (0, _Html.default)().create("li").addClass("content-block__list-item").addChild((0, _Html.default)().create("a").addAttribute("href", "/".concat(requestedData, "/").concat(item.id)).text(elementName).click(function (event) {
+            event.preventDefault();
+            var endpoint = event.target.getAttribute("href");
+            (0, _Api.default)().getRequest("http://localhost:8080/api".concat(endpoint), function (data) {
+              _this2.renderPageSingle(data, endpoint);
+            });
+          }));
+          contentBlockList.addChild(contentBlockListItem);
+        });
+      });
+      contentBlock.addChild(contentBlockTitle);
+      contentBlock.addChild(contentBlockList);
+      return contentBlock;
     }
   }, {
     key: "renderMainContent",
     value: function renderMainContent(requestedData) {
-      var mainContent = (0, _html.default)().create("main").addClass("main-content");
-      var containerDiv = (0, _html.default)().create("div").addClass("container");
+      var mainContent = (0, _Html.default)().create("main").addClass("main-content");
+      var containerDiv = (0, _Html.default)().create("div").addClass("container");
       var contentBlock = this.renderContentBlock(requestedData);
       containerDiv.addChild(contentBlock);
       mainContent.addChild(containerDiv);
       return mainContent;
+    }
+  }, {
+    key: "renderMainFooter",
+    value: function renderMainFooter() {
+      var mainFooter = (0, _Html.default)().create("footer").addClass("main-footer");
+      var mainFooterCopy = (0, _Html.default)().create("small").addClass("main-footer__copy").addHtml("&copy; 2019 Whisky");
+      mainFooter.addChild(mainFooterCopy);
+      return mainFooter;
+    }
+  }, {
+    key: "renderPageSingle",
+    value: function renderPageSingle(data, endpoint) {
+      var typeOfObject = endpoint.split("/")[1];
+
+      if (typeOfObject === "whiskyType") {
+        this.renderPageWhiskyType(data);
+      }
+
+      if (typeOfObject === "WhiskyBrand") {
+        this.renderWhiskyBrand(data);
+      }
+
+      if (typeOfObject === "WhiskyLabel") {
+        this.renderWhiskyLabel(data);
+      }
     }
   }, {
     key: "renderPageHome",
@@ -16428,7 +16487,7 @@ function () {
       var wrapperDiv = this.renderWrapperDiv();
       var mainHeader = this.renderMainHeader(); // const nav = this.renderMainNav();
 
-      var mainContent = this.renderMainContent('whiskyTypes');
+      var mainContent = this.renderMainContent('');
       var mainFooter = this.renderMainFooter();
       wrapperDiv.addChild(mainHeader);
       wrapperDiv.addChild(mainContent);
@@ -16439,7 +16498,7 @@ function () {
 
   return Components;
 }();
-},{"../html/html":"js/utils/html/html.js","../api/Api":"js/utils/api/Api.js","@babel/types":"../node_modules/@babel/types/lib/index.js"}],"js/main.js":[function(require,module,exports) {
+},{"../html/Html":"js/utils/html/Html.js","../api/Api":"js/utils/api/Api.js","@babel/types":"../node_modules/@babel/types/lib/index.js"}],"js/main.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -16490,7 +16549,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56202" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65341" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
