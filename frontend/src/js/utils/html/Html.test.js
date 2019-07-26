@@ -1,4 +1,4 @@
-import Html from "../src/Html";
+import Html from "./Html";
 
 describe("html", () => {
   describe("create", () => {
