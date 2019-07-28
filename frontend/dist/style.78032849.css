@@ -10,6 +10,17 @@
     --red: #69140E;
     --yellow: #FFFB46;
 
+
+  }
+
+  .content-block {
+    margin: 5rem 10rem 0rem 10rem;
+  }
+
+  .container {
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
 
   header {
@@ -60,6 +71,7 @@
   .wrapper {
       display: flex;
       flex-direction: column;
+      
         min-height: 100%;
   margin-bottom: -50px;
   }
@@ -67,9 +79,13 @@
   .main-content-area {
     padding: 2rem 0;
     text-align: center;
+    display:flex;
+    flex-direction: row;
     
 
   }
+
+
 
   .main-list-item {
       font-size: 2rem;
