@@ -386,7 +386,7 @@ function () {
           var contentBlockListItem = (0, _Html.default)().create("li").addClass("content-block__list-item").addChild((0, _Html.default)().create("a").addAttribute("href", "/".concat(requestedData, "/").concat(item.id)).text(elementName).click(function (event) {
             event.preventDefault();
             var endpoint = event.target.getAttribute("href");
-            (0, _Api.default)().getRequest("http://localhost:8080/api".concat(endpoint), function (data) {
+            (0, _Api.default)().getRequest("http://localhost:8080/api/".concat(endpoint), function (data) {
               _this2.renderPageSingle(data, endpoint);
             });
           }));
@@ -424,11 +424,11 @@ function () {
         this.renderPageType(data);
       }
 
-      if (typeOfObject === "WhiskyBrand") {
+      if (typeOfObject === "whiskyBrand") {
         this.renderPageBrand(data);
       }
 
-      if (typeOfObject === "WhiskyLabel") {
+      if (typeOfObject === "whiskyLabel") {
         this.renderPageLabel(data);
       }
     }
@@ -470,7 +470,7 @@ function () {
         var brandElement = (0, _Html.default)().create('li').addChild((0, _Html.default)().create('a').addAttribute('href', "/brands/".concat(brand.id)).text(brand.name).click(function (event) {
           event.preventDefault();
           var endpoint = event.target.getAttribute('href');
-          (0, _Api.default)().getRequest("http://localhost:8080/api".concat(endpoint), function (data) {
+          (0, _Api.default)().getRequest("http://localhost:8080/api/".concat(endpoint), function (data) {
             _this3.renderPageSingle(data, endpoint);
           });
         }));
@@ -479,7 +479,7 @@ function () {
       var labelType = (0, _Html.default)().create('h4').addChild((0, _Html.default)().create('a').addAttribute('href', "/types/".concat(data.type.id)).text(data.type.name).click(function (event) {
         event.preventDefault();
         var endpoint = event.target.getAttribute('href');
-        (0, _Api.default)().getRequest("http://localhost:8080/api".concat(endpoint), function (data) {
+        (0, _Api.default)().getRequest("http://localhost:8080/api/".concat(endpoint), function (data) {
           _this3.renderPageSingle(data, endpoint);
         });
       }));
@@ -556,7 +556,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51416" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49948" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

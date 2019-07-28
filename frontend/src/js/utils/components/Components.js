@@ -118,7 +118,7 @@ class Components {
 
                   const endpoint = event.target.getAttribute("href");
                   Api().getRequest(
-                    `http://localhost:8080/api${endpoint}`,
+                    `http://localhost:8080/api/${endpoint}`,
                     data => {
                       this.renderPageSingle(data, endpoint);
                     }
@@ -163,10 +163,10 @@ class Components {
     if (typeOfObject === "whiskyType") {
       this.renderPageType(data);
     }
-    if (typeOfObject === "WhiskyBrand") {
+    if (typeOfObject === "whiskyBrand") {
       this.renderPageBrand(data);
     }
-    if (typeOfObject === "WhiskyLabel") {
+    if (typeOfObject === "whiskyLabel") {
       this.renderPageLabel(data);
     }
   }
@@ -214,7 +214,7 @@ class Components {
               event.preventDefault()
 
               const endpoint = event.target.getAttribute('href')
-              Api().getRequest(`http://localhost:8080/api${endpoint}`, (data) => {
+              Api().getRequest(`http://localhost:8080/api/${endpoint}`, (data) => {
                 this.renderPageSingle(data, endpoint)
               })
             })
@@ -225,7 +225,7 @@ class Components {
       event.preventDefault()
 
       const endpoint = event.target.getAttribute('href')
-      Api().getRequest(`http://localhost:8080/api${endpoint}`, (data) => {
+      Api().getRequest(`http://localhost:8080/api/${endpoint}`, (data) => {
         this.renderPageSingle(data, endpoint)
       })
     }));
