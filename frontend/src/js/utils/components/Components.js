@@ -237,13 +237,13 @@ class Components {
 
 renderPageBrand(data) {
   const currentMainContentContainerContentBlock = this.getWrapperDiv().select('.main-content').select('.container').select('.content-block');
-  const authorName = Html().create('h3').addClass('content-block__title').text(data.name);
+  const brandName = Html().create('h3').addClass('content-block__title').text(data.name);
   currentMainContentContainerContentBlock.replace(brandName)
 }
 
 renderPageType(data) {
   const currentMainContentContainerContentBlock = this.getWrapperDiv().select('.main-content').select('.container').select('.content-block');
-  const authorName = Html().create('h3').addClass('content-block__title').text(data.name);
+  const typeName = Html().create('h3').addClass('content-block__title').text(data.name);
   currentMainContentContainerContentBlock.replace(typeName);
 }
 }
