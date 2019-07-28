@@ -1,4 +1,4 @@
-package wcci.whiskyapi;
+package wcci.whiskyapi.entities;
 
 import java.util.ArrayList;
 import java.util.Collection;

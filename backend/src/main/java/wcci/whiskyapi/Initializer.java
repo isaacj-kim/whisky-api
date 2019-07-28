@@ -5,6 +5,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import wcci.whiskyapi.entities.WhiskyBrand;
+import wcci.whiskyapi.entities.WhiskyLabel;
+import wcci.whiskyapi.entities.WhiskyType;
+import wcci.whiskyapi.repositories.WhiskyBrandRepository;
+import wcci.whiskyapi.repositories.WhiskyLabelRepository;
+import wcci.whiskyapi.repositories.WhiskyTypeRepository;
+
 @Component
 public class Initializer implements CommandLineRunner {
 

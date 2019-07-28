@@ -3,13 +3,19 @@ package wcci.whiskyapi;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import wcci.whiskyapi.entities.WhiskyBrand;
+import wcci.whiskyapi.entities.WhiskyLabel;
+import wcci.whiskyapi.entities.WhiskyType;
+import wcci.whiskyapi.repositories.WhiskyBrandRepository;
+import wcci.whiskyapi.repositories.WhiskyLabelRepository;
+import wcci.whiskyapi.repositories.WhiskyTypeRepository;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
