@@ -100,8 +100,8 @@ class Components {
           let elementName;
           if (item.name) {
             elementName = item.name;
-          } else if (item.name) {
-            elementName = item.name;
+          } else if (item.brandName) {
+            elementName = item.brandName;
           } else {
             elementName = item.labelName;
           }
