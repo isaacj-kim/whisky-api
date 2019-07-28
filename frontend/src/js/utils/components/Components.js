@@ -1,191 +1,249 @@
-import Html from "../html/Html"
-import Api from "../api/Api"
-import { directive } from "@babel/types";
+import Html from "../html/Html";
+import Api from "../api/Api";
+
 
 export default () => new Components();
 
 class Components {
-    getAppContext() {
-      return Html().select("#app");
-    }
-    renderWrapperDiv() {
-        return Html()
-            .create("div")
-            .addClass("wrapper");
-    }
-    renderContainerDiv() {
-        return Html()
-            .create('div')
-            .addClass('container');
-    }
-    renderMainHeader() {
-        const mainHeader = Html()
-            .create("header")
-        const mainHeaderTitle = Html()
-            .create("h1")
-            .addClass("page-title")
-            .text("Whisky Aficionado");
-        const headerNav = this.renderMainNav();
-        mainHeader.addChild(mainHeaderTitle);
-        mainHeader.addChild(headerNav);
-        return mainHeader;
-    }
-    renderMainNav() {
-        const headerNav = Html()
-            .create("nav")
-        const headerNavList = Html()
-            .create('ul')
-            .addClass('nav-list')
-        const headerNavListItemOne = Html()
-            .create('li')
-            .addClass('nav-list-item')
-            .addChild(
-                Html()
-                    .create("a")
-                    .addAttribute("href", "")
-                    .text("Home")
-                    .click(event => {
-                        event.preventDefault();
-                        this.renderPageHome();
-                    })
-            );
-            
-        const headerNavListItemTwo = Html()
-            .create('li')
-            .addClass('nav-list-item')
-            .addChild(
-                Html()
-                    .create("a")
-                    .addAttribute("href", "")
-                    .text("Types")
-                    .click(event => {
-                        event.preventDefault();
-                        this.renderTypesPage();
-                    })
-            );
-        const headerNavListItemThree = Html()
-            .create('li')
-            .addClass('nav-list-item')
-            .addChild(
-                Html()
-                    .create("a")
-                    .addAttribute("href", "")
-                    .text("Brands")
-                    .click(event => {
-                        event.preventDefault();
-                        this.renderBrandsPage();
-                        
-                    })
-            );
-            headerNavList.addChild(headerNavListItemOne);
-            headerNavList.addChild(headerNavListItemTwo);
-            headerNavList.addChild(headerNavListItemThree);
+  getAppContext() {
+    return Html().select("#app");
+  }
+  renderWrapperDiv() {
+    return Html()
+      .create("div")
+      .addClass("wrapper");
+  }
+  renderContainerDiv() {
+    return Html()
+      .create("div")
+      .addClass("container");
+  }
+  renderMainHeader() {
+    const mainHeader = Html().create("header");
+    const mainHeaderTitle = Html()
+      .create("h1")
+      .addClass("page-title")
+      .text("Whisky Aficionado");
+    const headerNav = this.renderMainNav();
+    mainHeader.addChild(mainHeaderTitle);
+    mainHeader.addChild(headerNav);
+    return mainHeader;
+  }
+  renderMainNav() {
+    const headerNav = Html().create("nav");
+    const headerNavList = Html()
+      .create("ul")
+      .addClass("nav-list");
+    const headerNavListItemOne = Html()
+      .create("li")
+      .addClass("nav-list-item")
+      .addChild(
+        Html()
+          .create("a")
+          .addAttribute("href", "")
+          .text("Home")
+          .click(event => {
+            event.preventDefault();
+            this.renderPageHome();
+          })
+      );
 
-            headerNav.addChild(headerNavList);
-        
-            return headerNav;
+    const headerNavListItemTwo = Html()
+      .create("li")
+      .addClass("nav-list-item")
+      .addChild(
+        Html()
+          .create("a")
+          .addAttribute("href", "")
+          .text("Types")
+          .click(event => {
+            event.preventDefault();
+            this.renderPageTypes();
+          })
+      );
+    const headerNavListItemThree = Html()
+      .create("li")
+      .addClass("nav-list-item")
+      .addChild(
+        Html()
+          .create("a")
+          .addAttribute("href", "")
+          .text("Brands")
+          .click(event => {
+            event.preventDefault();
+            this.renderPageBrands();
+          })
+      );
+    headerNavList.addChild(headerNavListItemOne);
+    headerNavList.addChild(headerNavListItemTwo);
+    headerNavList.addChild(headerNavListItemThree);
 
+    headerNav.addChild(headerNavList);
 
-    }
-    renderContentBlock(requestedData) {
-        const contentBlock = Html()
-          .create("section")
-          .addClass("content-block");
-        const contentBlockTitle = Html()
-          .create("h3")
-          .addClass("content-block__title")
-          .text(requestedData);
-        const contentBlockList = Html()
-          .create("ul")
-          .addClass("content-block__list");
-        Api().getRequest(
-          `http://localhost:8080/api/${requestedData}`,
-          responseCollection => {
-            responseCollection.forEach(item => {
-              let elementName;
-              if (item.name) {
-                elementName = item.name;
-              } else if (item.brandName) {
-                elementName = item.brandName;
-              } else {
-                elementName = item.labelName;
-              }
-              const contentBlockListItem = Html()
-                .create("li")
-                .addClass("content-block__list-item")
-                .addChild(
-                  Html()
-                    .create("a")
-                    .addAttribute("href", `/${requestedData}/${item.id}`)
-                    .text(elementName)
-                    .click(event => {
-                      event.preventDefault();
-    
-                      const endpoint = event.target.getAttribute("href");
-                      Api().getRequest(
-                        `http://localhost:8080/api${endpoint}`,
-                        data => {
-                          this.renderPageSingle(data, endpoint);
-                        }
-                      );
-                    })
-                );
-              contentBlockList.addChild(contentBlockListItem);
-            });
+    return headerNav;
+  }
+  renderContentBlock(requestedData) {
+    const contentBlock = Html()
+      .create("section")
+      .addClass("content-block");
+    const contentBlockTitle = Html()
+      .create("h3")
+      .addClass("content-block__title")
+      .text(requestedData);
+    const contentBlockList = Html()
+      .create("ul")
+      .addClass("content-block__list");
+    Api().getRequest(
+      `http://localhost:8080/api/${requestedData}`,
+      responseCollection => {
+        responseCollection.forEach(item => {
+          let elementName;
+          if (item.name) {
+            elementName = item.name;
+          } else if (item.name) {
+            elementName = item.name;
+          } else {
+            elementName = item.labelName;
           }
-        );
-        contentBlock.addChild(contentBlockTitle);
-        contentBlock.addChild(contentBlockList);
-        return contentBlock;
-      }
+          const contentBlockListItem = Html()
+            .create("li")
+            .addClass("content-block__list-item")
+            .addChild(
+              Html()
+                .create("a")
+                .addAttribute("href", `/${requestedData}/${item.id}`)
+                .text(elementName)
+                .click(event => {
+                  event.preventDefault();
 
-    renderMainContent(requestedData) {
-        const mainContent = Html()
-          .create("main")
-          .addClass("main-content");
-        const containerDiv = Html()
-          .create("div")
-          .addClass("container");
-        const contentBlock = this.renderContentBlock(requestedData);
-        containerDiv.addChild(contentBlock);
-        mainContent.addChild(containerDiv);
-        return mainContent;
+                  const endpoint = event.target.getAttribute("href");
+                  Api().getRequest(
+                    `http://localhost:8080/api${endpoint}`,
+                    data => {
+                      this.renderPageSingle(data, endpoint);
+                    }
+                  );
+                })
+            );
+          contentBlockList.addChild(contentBlockListItem);
+        });
+      }
+    );
+    contentBlock.addChild(contentBlockTitle);
+    contentBlock.addChild(contentBlockList);
+    return contentBlock;
+  }
+
+  renderMainContent(requestedData) {
+    const mainContent = Html()
+      .create("main")
+      .addClass("main-content");
+    const containerDiv = Html()
+      .create("div")
+      .addClass("container");
+    const contentBlock = this.renderContentBlock(requestedData);
+    containerDiv.addChild(contentBlock);
+    mainContent.addChild(containerDiv);
+    return mainContent;
+  }
+  renderMainFooter() {
+    const mainFooter = Html()
+      .create("footer")
+      .addClass("footer");
+    const mainFooterCopy = Html()
+      .create("small")
+      .addClass("main-footer__copy")
+      .addHtml("&copy; 2019 Whisky");
+    mainFooter.addChild(mainFooterCopy);
+    return mainFooter;
+  }
+
+  renderPageSingle(data, endpoint) {
+    const typeOfObject = endpoint.split("/")[1];
+    if (typeOfObject === "whiskyType") {
+      this.renderPageType(data);
     }
-    renderMainFooter() {
-        const mainFooter = Html()
-          .create("footer")
-          .addClass("main-footer");
-        const mainFooterCopy = Html()
-          .create("small")
-          .addClass("main-footer__copy")
-          .addHtml("&copy; 2019 Whisky");
-        mainFooter.addChild(mainFooterCopy);
-        return mainFooter;
-      }
+    if (typeOfObject === "WhiskyBrand") {
+      this.renderPageBrand(data);
+    }
+    if (typeOfObject === "WhiskyLabel") {
+      this.renderPageLabel(data);
+    }
+  }
+  renderPageHome() {
+    const app = this.getAppContext();
+    const wrapperDiv = this.renderWrapperDiv();
+    const mainHeader = this.renderMainHeader();
+    const nav = this.renderMainNav();
+    const mainContent = this.renderMainContent("");
+    const mainFooter = this.renderMainFooter();
+    wrapperDiv.addChild(mainHeader);
+    wrapperDiv.addChild(mainContent);
+    wrapperDiv.addChild(mainFooter);
+    app.replace(wrapperDiv);
+  }
 
-    renderPageSingle(data, endpoint) {
-        const typeOfObject = endpoint.split("/")[1];
-        if (typeOfObject === "whiskyType") {
-          this.renderPageWhiskyType(data);
-        }
-        if (typeOfObject === "WhiskyBrand") {
-          this.renderWhiskyBrand(data);
-        }
-        if (typeOfObject === "WhiskyLabel") {
-          this.renderWhiskyLabel(data);
-        }
-      }
-    renderPageHome() {
-        const app = this.getAppContext();
-        const wrapperDiv = this.renderWrapperDiv();
-        const mainHeader = this.renderMainHeader();
-        // const nav = this.renderMainNav();
-        const mainContent = this.renderMainContent('');
-        const mainFooter = this.renderMainFooter();
-        wrapperDiv.addChild(mainHeader);
-        wrapperDiv.addChild(mainContent);
-        wrapperDiv.addChild(mainFooter);
-        app.replace(wrapperDiv);
-      }
+  renderPageTypes() {
+    const currentMainContentContainer = this.renderWrapperDiv()
+      .select(".main-content")
+      .select(".container");
+    currentMainContentContainer.replace(this.renderContentBlock("types"));
+  }
 
+  renderPageBrands() {
+    const currentMainContentContainer = this.renderWrapperDiv()
+    .select(".main-content")
+    .select(".container");
+  currentMainContentContainer.replace(this.renderContentBlock("brands"));
+    
+  }
+
+  renderPageLabel(data) {
+    const currentMainContentContainerContentBlock = this.getWrapperDiv().select('.main-content').select('.container').select('.content-block');
+    const labelName = Html().create('h3').addClass('content-block__title').text(data.labelName);
+    const labelBrand = Html().create('ul').addClass('brand');
+    data.whiskyBrand.forEach(brand => {
+      const brandElement = Html()
+        .create('li')
+        .addChild(
+          Html()
+            .create('a')
+            .addAttribute('href', `/brands/${brand.id}`)
+            .text(brand.name)
+            .click((event) => {
+              event.preventDefault()
+
+              const endpoint = event.target.getAttribute('href')
+              Api().getRequest(`http://localhost:8080/api${endpoint}`, (data) => {
+                this.renderPageSingle(data, endpoint)
+              })
+            })
+        );
+        labelBrand.addChild(brandElement);
+    });
+    const labelType = Html().create('h4').addChild(Html().create('a').addAttribute('href', `/types/${data.type.id}`).text(data.type.name).click((event) => {
+      event.preventDefault()
+
+      const endpoint = event.target.getAttribute('href')
+      Api().getRequest(`http://localhost:8080/api${endpoint}`, (data) => {
+        this.renderPageSingle(data, endpoint)
+      })
+    }));
+    currentMainContentContainerContentBlock.replace(labelName);
+    currentMainContentContainerContentBlock.addChild(labelBrand);
+    currentMainContentContainerContentBlock.addChild(labelType);
+
+}
+
+renderPageBrand(data) {
+  const currentMainContentContainerContentBlock = this.getWrapperDiv().select('.main-content').select('.container').select('.content-block');
+  const authorName = Html().create('h3').addClass('content-block__title').text(data.name);
+  currentMainContentContainerContentBlock.replace(brandName)
+}
+
+renderPageType(data) {
+  const currentMainContentContainerContentBlock = this.getWrapperDiv().select('.main-content').select('.container').select('.content-block');
+  const authorName = Html().create('h3').addClass('content-block__title').text(data.name);
+  currentMainContentContainerContentBlock.replace(typeName);
+}
 }
