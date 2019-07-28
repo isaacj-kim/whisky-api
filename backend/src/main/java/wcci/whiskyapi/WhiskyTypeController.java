@@ -22,6 +22,7 @@ public class WhiskyTypeController {
 		}
 
 	@GetMapping("/types/{id}")
+	@CrossOrigin
 	public WhiskyType sendWhiskyType(@PathVariable Long id) {
 		return whiskyTypeRepo.findById(id).get();
 		}

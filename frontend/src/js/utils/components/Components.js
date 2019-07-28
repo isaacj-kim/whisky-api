@@ -174,7 +174,6 @@ class Components {
     const app = this.getAppContext();
     const wrapperDiv = this.renderWrapperDiv();
     const mainHeader = this.renderMainHeader();
-    const nav = this.renderMainNav();
     const mainContent = this.renderMainContent("");
     const mainFooter = this.renderMainFooter();
     wrapperDiv.addChild(mainHeader);
@@ -189,7 +188,45 @@ class Components {
       .select(".container");
     currentMainContentContainer.replace(this.renderContentBlock("types"));
   }
+  renderPageType(data) {
+    const currentMainContentContainerContentBlock = this.renderWrapperDiv()
+      .select(".main-content")
+      .select(".container")
+      .select(".content-block");
+    console.log(data);
+    const typeEntry = Html()
+      .create("div")
+      .addClass("typeEntry");
+    const typeName = Html()
+      .create("h3")
+      .addClass("content-block__title")
+      .text(data.name);
+    
+    const typeBrands = Html().create("ul");
+    data.brands.forEach(album => {
+      const brandElement = Html()
+        .create("li")
+        .addChild(
+          html()
+            .create("a")
+            .addAttribute("href", `/brands/${brand.id}`)
+            .text(brand.brandName)
+            .click(event => {
+              event.preventDefault();
 
+              const endpoint = event.target.getAttribute("href");
+              Api().getRequest(`http://localhost:8080/api${endpoint}`, data => {
+                this.renderPageSingle(data, endpoint);
+              });
+            })
+        );
+      typeBrands.addChild(brandElement);
+    });
+    typeEntry.addChild(typeName);
+    
+    console.log(typeEntry);
+    currentMainContentContainerContentBlock.replace(typeEntry);
+  }
   renderPageBrands() {
     const currentMainContentContainer = this.renderWrapperDiv()
     .select(".main-content")
@@ -241,9 +278,5 @@ renderPageBrand(data) {
   currentMainContentContainerContentBlock.replace(brandName)
 }
 
-renderPageType(data) {
-  const currentMainContentContainerContentBlock = this.getWrapperDiv().select('.main-content').select('.container').select('.content-block');
-  const typeName = Html().create('h3').addClass('content-block__title').text(data.name);
-  currentMainContentContainerContentBlock.replace(typeName);
-}
+
 }

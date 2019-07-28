@@ -1,6 +1,7 @@
 package wcci.whiskyapi;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,11 +19,13 @@ public class WhiskyBrandController {
 		
 		
 		@GetMapping("/brands")
+		@CrossOrigin
 		public Iterable<WhiskyBrand> sendWhiskyBrands(){
 			return whiskyBrandRepo.findAll();
 		}
 		
 		@GetMapping ("/brands/{id}")
+		@CrossOrigin
 		public WhiskyBrand sendWhiskyBrand(@PathVariable Long id) {
 			return whiskyBrandRepo.findById(id).get();
 		}
