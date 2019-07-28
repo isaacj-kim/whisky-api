@@ -22,6 +22,11 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import wcci.whiskyapi.controllers.WhiskyBrandController;
+import wcci.whiskyapi.entities.WhiskyBrand;
+import wcci.whiskyapi.entities.WhiskyType;
+import wcci.whiskyapi.repositories.WhiskyBrandRepository;
+
 
 @WebMvcTest(WhiskyBrandController.class)
 @RunWith(SpringRunner.class)

@@ -1,4 +1,4 @@
-package wcci.whiskyapi;
+package wcci.whiskyapi.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

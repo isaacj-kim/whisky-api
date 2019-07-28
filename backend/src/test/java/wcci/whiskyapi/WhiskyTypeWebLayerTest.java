@@ -20,6 +20,10 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import wcci.whiskyapi.controllers.WhiskyTypeController;
+import wcci.whiskyapi.entities.WhiskyType;
+import wcci.whiskyapi.repositories.WhiskyTypeRepository;
+
 @WebMvcTest(WhiskyTypeController.class)
 @RunWith(SpringRunner.class)
 public class WhiskyTypeWebLayerTest {
