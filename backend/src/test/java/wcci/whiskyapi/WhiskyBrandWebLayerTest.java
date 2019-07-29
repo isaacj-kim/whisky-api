@@ -23,22 +23,22 @@ import org.springframework.test.web.servlet.MockMvc;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 
-@WebMvcTest(WhiskyBrandController.class)
+@WebMvcTest(BrandController.class)
 @RunWith(SpringRunner.class)
 public class WhiskyBrandWebLayerTest {
 	@Autowired
 	MockMvc mockMvc;
 
 	@MockBean
-	WhiskyBrandRepository whiskyBrandRepo;
+	BrandRepository whiskyBrandRepo;
 	
-	private WhiskyType whiskyType;
-	private WhiskyBrand testWhiskyBrand;
+	private Type whiskyType;
+	private Brand testWhiskyBrand;
 	private ObjectMapper mapper = new ObjectMapper();
 
 	@Before
 	public void setup() {
-		testWhiskyBrand = new WhiskyBrand("", whiskyType);
+		testWhiskyBrand = new Brand("", "", whiskyType);
 	}
 
 	@Test
@@ -59,12 +59,12 @@ public class WhiskyBrandWebLayerTest {
 
 	@Test
 	public void addBrand() throws Exception {
-		WhiskyBrand whiskyBrandToAdd = new WhiskyBrand("", whiskyType);
+		Brand whiskyBrandToAdd = new Brand("", "", whiskyType);
 		mockMvc.perform(post("/api/add-brands").contentType(MediaType.APPLICATION_JSON).content(toJson(whiskyBrandToAdd)))
 				.andExpect(status().isOk());
 	}
 
-	private String toJson(WhiskyBrand whiskyBrandToAdd) {
+	private String toJson(Brand whiskyBrandToAdd) {
 		return testWhiskyBrand.getBrandName();
 	}
 }

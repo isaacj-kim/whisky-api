@@ -24,7 +24,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 
-@WebMvcTest(WhiskyLabelController.class)
+@WebMvcTest(LabelController.class)
 @RunWith(SpringRunner.class)
 public class WhiskyLabelWebLayerTest {
 
@@ -32,14 +32,14 @@ public class WhiskyLabelWebLayerTest {
 	MockMvc mockMvc;
 	
 	@MockBean
-	WhiskyLabelRepository whiskyLabelRepo;
+	LabelRepository whiskyLabelRepo;
 	
-	private WhiskyLabel testWhiskyLabel;
-	private WhiskyBrand whiskyBrand;
+	private Label testWhiskyLabel;
+	private Brand whiskyBrand;
 	private ObjectMapper mapper = new ObjectMapper();
 	@Before
 	public void setup() {
-		testWhiskyLabel = new WhiskyLabel("", whiskyBrand);
+		testWhiskyLabel = new Label("", whiskyBrand);
 	}
 
 	@Test
@@ -60,12 +60,12 @@ public class WhiskyLabelWebLayerTest {
 
 	@Test
 	public void addLabel() throws Exception {
-		WhiskyLabel labelToAdd = new WhiskyLabel("", whiskyBrand);
+		Label labelToAdd = new Label("", whiskyBrand);
 		mockMvc.perform(post("/api/add-labels").contentType(MediaType.APPLICATION_JSON).content(toJson(labelToAdd)))
 				.andExpect(status().isOk());
 	}
 
-	private String toJson(WhiskyLabel labelToAdd) {
+	private String toJson(Label labelToAdd) {
 		return testWhiskyLabel.getLabelName();
 	}
 }

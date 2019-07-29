@@ -20,7 +20,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-@WebMvcTest(WhiskyTypeController.class)
+@WebMvcTest(TypeController.class)
 @RunWith(SpringRunner.class)
 public class WhiskyTypeWebLayerTest {
 
@@ -28,14 +28,14 @@ public class WhiskyTypeWebLayerTest {
 	MockMvc mockMvc;
 	
 	@MockBean
-	WhiskyTypeRepository whiskyTypeRepo;
+	TypeRepository whiskyTypeRepo;
 	
-	private WhiskyType testWhiskyType;
+	private Type testWhiskyType;
 	private ObjectMapper mapper = new ObjectMapper();
 	
 	@Before
 	public void setup() {
-		testWhiskyType = new WhiskyType("");
+		testWhiskyType = new Type("", "");
 	}	
 		
 	@Test

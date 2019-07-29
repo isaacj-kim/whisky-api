@@ -8,23 +8,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 
+@CrossOrigin
 @RestController
 @RequestMapping("/api")
-public class WhiskyTypeController {
+public class TypeController {
 
 	@Autowired
-	WhiskyTypeRepository whiskyTypeRepo;
+	TypeRepository typeRepo;
 
 	@GetMapping("/types")
-	@CrossOrigin
-	public Iterable<WhiskyType> sendWhiskyType() {
-		return whiskyTypeRepo.findAll();
+	public Iterable<Type> sendWhiskyType() {
+		return typeRepo.findAll();
 		}
 
 	@GetMapping("/types/{id}")
-	@CrossOrigin
-	public WhiskyType sendWhiskyType(@PathVariable Long id) {
-		return whiskyTypeRepo.findById(id).get();
+	public Type sendWhiskyType(@PathVariable Long id) {
+		return typeRepo.findById(id).get();
 		}
 
 

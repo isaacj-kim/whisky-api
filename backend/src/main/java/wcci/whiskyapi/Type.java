@@ -1,47 +1,57 @@
 package wcci.whiskyapi;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-
-
-//Maybe change it to blends
 @Entity
-public class WhiskyLabel {
+public class Type {
+
+	
 	
 	@Id
 	@GeneratedValue
 	private Long id;
 	
-	@ManyToOne
-	@JsonIgnore
-	private WhiskyBrand whiskyBrand;
+	@OneToMany(mappedBy = "type")
+	private Collection<Brand> brands;
 	
-	private String labelName;
+	
+	
+	private String name;
+	private String description;
+	
 	
 	
 	@SuppressWarnings("unused")
-	private WhiskyLabel() {
+	private Type() {
 		
 	}
-
-	public WhiskyLabel(String labelName, WhiskyBrand whiskyBrand) {
-	this.labelName = labelName;
-	this.whiskyBrand = whiskyBrand;
+	public Type(String name, String description) {
+		this.name = name;
+		this.description = description;
+		this.brands = new ArrayList<>();
 	}
 	
 	public Long getId() {
 		return id;
 	}
-
-	public String getLabelName() {
-		return labelName;
+	
+	public String getName() {
+		return name;
 	}
-
+	public String getDescription() {
+		return description;
+	}
+	public void addBrand(Brand brandName) {
+		
+	}
+	
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -58,7 +68,7 @@ public class WhiskyLabel {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		WhiskyLabel other = (WhiskyLabel) obj;
+		Type other = (Type) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -66,6 +76,5 @@ public class WhiskyLabel {
 			return false;
 		return true;
 	}
+
 }
-
-

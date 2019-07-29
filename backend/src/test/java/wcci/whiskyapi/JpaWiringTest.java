@@ -20,16 +20,16 @@ public class JpaWiringTest {
 	private TestEntityManager entityManager;
 	
 	@Autowired
-	WhiskyTypeRepository whiskyTypeRepo;
+	TypeRepository whiskyTypeRepo;
 	
 	@Autowired
-	WhiskyBrandRepository whiskyBrandRepo;
+	BrandRepository whiskyBrandRepo;
 	
 	@Autowired
-	WhiskyLabelRepository whiskyLabelRepo;
+	LabelRepository whiskyLabelRepo;
 
-	private WhiskyType whiskyType;
-	private WhiskyBrand whiskyBrand;
+	private Type whiskyType;
+	private Brand whiskyBrand;
 	
 //	private WhiskyBrand testWhiskyBrand = new WhiskyBrand("Proper 12", testWhiskyType);
 //	private WhiskyLabel testWhiskyLabel = new WhiskyLabel("Proper Black");
@@ -45,11 +45,11 @@ public class JpaWiringTest {
 	
 	@Test
 	public void WhiskyBrandShouldHaveOneWhiskyTypeAndCollectionOfWhiskyLabels() {
-		WhiskyType testWhiskyType = new WhiskyType("Irish Whisky");
+		Type testWhiskyType = new Type("Irish Whisky", "");
 		testWhiskyType = whiskyTypeRepo.save(testWhiskyType);
-		WhiskyBrand testWhiskyBrand = new WhiskyBrand("Proper 12", whiskyType);
-		testWhiskyBrand.addWhiskyType(testWhiskyType);
-		WhiskyLabel testWhiskyLabel = new WhiskyLabel("Proper Black", whiskyBrand);
+		Brand testWhiskyBrand = new Brand("Proper 12", "", whiskyType);
+		testWhiskyBrand.addType(testWhiskyType);
+		Label testWhiskyLabel = new Label("Proper Black", whiskyBrand);
 		testWhiskyLabel = whiskyLabelRepo.save(testWhiskyLabel);
 
 		testWhiskyType.addBrand(testWhiskyBrand);
@@ -61,8 +61,8 @@ public class JpaWiringTest {
 		entityManager.flush();
 		entityManager.clear();
 		
-		WhiskyBrand retrievedWhiskyBrand = whiskyBrandRepo.findById(testWhiskyBrand.getId()).get();
-		assertThat(retrievedWhiskyBrand.getWhiskyType(), is(testWhiskyType));
+		Brand retrievedWhiskyBrand = whiskyBrandRepo.findById(testWhiskyBrand.getId()).get();
+		assertThat(retrievedWhiskyBrand.getType(), is(testWhiskyType));
 	}
 	
 	

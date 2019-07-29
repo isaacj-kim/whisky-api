@@ -82,57 +82,48 @@ class Components {
 
     return headerNav;
   }
+
   renderContentBlock(requestedData) {
-    const contentBlock = Html()
-      .create("section")
-      .addClass("content-block");
-    const contentBlockTitle = Html()
-      .create("h3")
-      .addClass("content-block__title")
-      .text(requestedData);
-    const contentBlockList = Html()
-      .create("ul")
-      .addClass("content-block__list");
+    const contentBlock = Html().create('section').addClass('content-block');
+    const contentBlockTitle = Html().create('h3').addClass('content-block__title').text(requestedData);
+    const contentBlockList = Html().create('ul').addClass('content-block__list');
     Api().getRequest(
       `http://localhost:8080/api/${requestedData}`,
-      responseCollection => {
-        responseCollection.forEach(item => {
+      (responseCollection) => {
+        responseCollection.forEach((item) => {
           let elementName;
           if (item.name) {
             elementName = item.name;
           } else if (item.brandName) {
             elementName = item.brandName;
           } else {
-            elementName = item.labelName;
+            elementName = labelName;
           }
           const contentBlockListItem = Html()
-            .create("li")
-            .addClass("content-block__list-item")
-            .addChild(
-              Html()
-                .create("a")
-                .addAttribute("href", `/${requestedData}/${item.id}`)
-                .text(elementName)
-                .click(event => {
-                  event.preventDefault();
+            .create('li')
+            .addClass('content-block__list-item')
+            .addChild(Html()
+              .create('a')
+              .addAttribute('href', `/${requestedData}/${item.id}`)
+              .text(elementName)
+              .click((event) => {
+                event.preventDefault()
 
-                  const endpoint = event.target.getAttribute("href");
-                  Api().getRequest(
-                    `http://localhost:8080/api${endpoint}`,
-                    data => {
-                      this.renderPageSingle(data, endpoint);
-                    }
-                  );
+                const endpoint = event.target.getAttribute('href')
+                Api().getRequest(`http://localhost:8080/api${endpoint}`, (data) => {
+                  this.renderPageSingle(data, endpoint)
                 })
-            );
+              }));
           contentBlockList.addChild(contentBlockListItem);
         });
-      }
-    );
+      });
     contentBlock.addChild(contentBlockTitle);
     contentBlock.addChild(contentBlockList);
     return contentBlock;
   }
+
+
+
 
   renderMainContent(requestedData) {
     const mainContent = Html()
@@ -160,13 +151,13 @@ class Components {
 
   renderPageSingle(data, endpoint) {
     const typeOfObject = endpoint.split("/")[1];
-    if (typeOfObject === "whiskyType") {
+    if (typeOfObject === "types") {
       this.renderPageType(data);
     }
-    if (typeOfObject === "WhiskyBrand") {
+    if (typeOfObject === "brands") {
       this.renderPageBrand(data);
     }
-    if (typeOfObject === "WhiskyLabel") {
+    if (typeOfObject === "labels") {
       this.renderPageLabel(data);
     }
   }
@@ -193,7 +184,7 @@ class Components {
       .select(".main-content")
       .select(".container")
       .select(".content-block");
-    console.log(data);
+    // console.log(data);
     const typeEntry = Html()
       .create("div")
       .addClass("typeEntry");
@@ -201,16 +192,70 @@ class Components {
       .create("h3")
       .addClass("content-block__title")
       .text(data.name);
-    
-    const typeBrands = Html().create("ul");
-    data.brands.forEach(album => {
-      const brandElement = Html()
+    const typeDescription = Html()
+      .create('h5')
+      .addClass("content-block__description")
+      .text(data.description)
+
+    // const typeBrands = Html().create('ul');
+    // data.brands.forEach(brand =>{
+    //   const brandElement = Html()
+    //   .create('li')
+    //   .addChild(
+    //     Html()
+    //     .create('a')
+    //     .addAttribute("href", `/brands/$brand,id`)
+    //     .text(brand.brandName)
+    //     .click(event =>{
+    //       event.preventDefault();
+    //       const endpoint = event.target.gettAttribute("href");
+    //       Api().getRequest(`http://localhost:8080/api${endpoint}`), data =>{
+    //         this.renderPageSingle(data, endpoint);
+    //       }
+    //     })
+    //   );
+    //   typeBrands.addChild(brandElement);
+    // });
+    typeEntry.addChild(typeName);
+    typeEntry.addChild(typeDescription);
+
+    currentMainContentContainerContentBlock.replace(typeEntry);
+
+  };
+  renderPageBrands() {
+    const currentMainContentContainer = this.renderWrapperDiv()
+      .select(".main-content")
+      .select(".container");
+    currentMainContentContainer.replace(this.renderContentBlock("brands"));
+
+  };
+  renderPageBrand(data) {
+    const currentMainContentContainerContentBlock = this.renderWrapperDiv()
+      .select(".main-content")
+      .select(".container")
+      .select(".content-block");
+    // console.log(data);
+    const brandEntry = Html()
+      .create("div")
+      .addClass("brand-Entry");
+    const brandsName = Html()
+      .create("h3")
+      .addClass("content-block__title")
+      .text(data.brandName);
+    const brandDescription = Html()
+      .create("h5")
+      .addClass("content-block__description")
+      .text(data.brandDescription);
+
+    const brandLabels = Html().create("ul");
+    data.labels.forEach(label => {
+      const labelElement = Html()
         .create("li")
         .addChild(
-          html()
+          Html()
             .create("a")
-            .addAttribute("href", `/brands/${brand.id}`)
-            .text(brand.brandName)
+            .addAttribute("href", `/labels/${label.id}`)
+            .text(label.labelName)
             .click(event => {
               event.preventDefault();
 
@@ -220,20 +265,12 @@ class Components {
               });
             })
         );
-      typeBrands.addChild(brandElement);
+      brandLabels.addChild(labelElement);
     });
-    typeEntry.addChild(typeName);
-    
-    console.log(typeEntry);
-    currentMainContentContainerContentBlock.replace(typeEntry);
-  }
-  renderPageBrands() {
-    const currentMainContentContainer = this.renderWrapperDiv()
-    .select(".main-content")
-    .select(".container");
-  currentMainContentContainer.replace(this.renderContentBlock("brands"));
-    
-  }
+    brandEntry.addChild(brandsName)
+    brandEntry.addChild(brandDescription);
+    currentMainContentContainerContentBlock.replace(brandEntry);
+  };
 
   renderPageLabel(data) {
     const currentMainContentContainerContentBlock = this.getWrapperDiv().select('.main-content').select('.container').select('.content-block');
@@ -256,7 +293,7 @@ class Components {
               })
             })
         );
-        labelBrand.addChild(brandElement);
+      labelBrand.addChild(brandElement);
     });
     const labelType = Html().create('h4').addChild(Html().create('a').addAttribute('href', `/types/${data.type.id}`).text(data.type.name).click((event) => {
       event.preventDefault()
@@ -270,13 +307,5 @@ class Components {
     currentMainContentContainerContentBlock.addChild(labelBrand);
     currentMainContentContainerContentBlock.addChild(labelType);
 
-}
-
-renderPageBrand(data) {
-  const currentMainContentContainerContentBlock = this.getWrapperDiv().select('.main-content').select('.container').select('.content-block');
-  const brandName = Html().create('h3').addClass('content-block__title').text(data.name);
-  currentMainContentContainerContentBlock.replace(brandName)
-}
-
-
-}
+  };
+};
