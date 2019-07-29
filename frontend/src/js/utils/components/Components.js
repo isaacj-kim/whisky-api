@@ -189,7 +189,7 @@ class Components {
       .create("div")
       .addClass("typeEntry");
     const typeName = Html()
-      .create("h5")
+      .create("h3")
       .addClass("content-block__title")
       .text(data.name);
     const typeDescription = Html()
