@@ -457,7 +457,7 @@ function () {
       var currentMainContentContainerContentBlock = this.renderWrapperDiv().select(".main-content").select(".container").select(".content-block"); // console.log(data);
 
       var typeEntry = (0, _Html.default)().create("div").addClass("typeEntry");
-      var typeName = (0, _Html.default)().create("h3").addClass("content-block__title").text(data.name);
+      var typeName = (0, _Html.default)().create("h5").addClass("content-block__title").text(data.name);
       var typeDescription = (0, _Html.default)().create('h5').addClass("content-block__description").text(data.description); // const typeBrands = Html().create('ul');
       // data.brands.forEach(brand => {
       //   const brandElement = Html()
@@ -603,7 +603,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54483" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56450" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

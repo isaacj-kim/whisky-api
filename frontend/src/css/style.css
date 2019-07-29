@@ -46,6 +46,7 @@
       color:#fff;
       opacity: .9;
       text-transform: uppercase;
+      list-style:none;;
   }
 
   .nav-list {
@@ -94,6 +95,7 @@
     opacity: .9;
     /* margin-top:2.2rem; */
   }
-.type-brand-font{
-  color: #000;
-}
+  .content-block__description{
+    margin-top: 2rem !important;
+  }
+
