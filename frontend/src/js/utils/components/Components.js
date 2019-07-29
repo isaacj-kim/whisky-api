@@ -36,10 +36,10 @@ class Components {
       .addClass("nav-list");
     const headerNavListItemOne = Html()
       .create("li")
-      .addClass("nav-list-item")
       .addChild(
         Html()
-          .create("a")
+        .create("a")
+        .addClass("nav-list-item")
           .addAttribute("href", "")
           .text("Home")
           .click(event => {
@@ -50,10 +50,10 @@ class Components {
 
     const headerNavListItemTwo = Html()
       .create("li")
-      .addClass("nav-list-item")
       .addChild(
         Html()
-          .create("a")
+        .create("a")
+        .addClass("nav-list-item")
           .addAttribute("href", "")
           .text("Types")
           .click(event => {
@@ -63,10 +63,10 @@ class Components {
       );
     const headerNavListItemThree = Html()
       .create("li")
-      .addClass("nav-list-item")
       .addChild(
         Html()
-          .create("a")
+        .create("a")
+        .addClass("nav-list-item")
           .addAttribute("href", "")
           .text("Brands")
           .click(event => {
@@ -165,7 +165,7 @@ class Components {
     const app = this.getAppContext();
     const wrapperDiv = this.renderWrapperDiv();
     const mainHeader = this.renderMainHeader();
-    const mainContent = this.renderMainContent("");
+    const mainContent = this.renderMainContent("Where Whisky Lovers Gather");
     const mainFooter = this.renderMainFooter();
     wrapperDiv.addChild(mainHeader);
     wrapperDiv.addChild(mainContent);
@@ -176,7 +176,7 @@ class Components {
   renderPageTypes() {
     const currentMainContentContainer = this.renderWrapperDiv()
       .select(".main-content")
-      .select(".container");
+      .select(".container")
     currentMainContentContainer.replace(this.renderContentBlock("types"));
   }
   renderPageType(data) {
@@ -198,20 +198,21 @@ class Components {
       .text(data.description)
 
     // const typeBrands = Html().create('ul');
-    // data.brands.forEach(brand =>{
+    // data.brands.forEach(brand => {
     //   const brandElement = Html()
     //   .create('li')
     //   .addChild(
     //     Html()
     //     .create('a')
-    //     .addAttribute("href", `/brands/$brand,id`)
+    //     .addAttribute("href", `/brands/${brand.id}`)
     //     .text(brand.brandName)
-    //     .click(event =>{
+    //     .click(event => {
     //       event.preventDefault();
+
     //       const endpoint = event.target.gettAttribute("href");
-    //       Api().getRequest(`http://localhost:8080/api${endpoint}`), data =>{
+    //       Api().getRequest(`http://localhost:8080/api${endpoint}`, data =>{
     //         this.renderPageSingle(data, endpoint);
-    //       }
+    //       });
     //     })
     //   );
     //   typeBrands.addChild(brandElement);
@@ -247,27 +248,27 @@ class Components {
       .addClass("content-block__description")
       .text(data.brandDescription);
 
-    const brandLabels = Html().create("ul");
-    data.labels.forEach(label => {
-      const labelElement = Html()
-        .create("li")
-        .addChild(
-          Html()
-            .create("a")
-            .addAttribute("href", `/labels/${label.id}`)
-            .text(label.labelName)
-            .click(event => {
-              event.preventDefault();
+    // const brandLabels = Html().create("ul");
+    // data.labels.forEach(label => {
+    //   const labelElement = Html()
+    //     .create("li")
+    //     .addChild(
+    //       Html()
+    //         .create("a")
+    //         .addAttribute("href", `/labels/${label.id}`)
+    //         .text(label.labelName)
+    //         .click(event => {
+    //           event.preventDefault();
 
-              const endpoint = event.target.getAttribute("href");
-              Api().getRequest(`http://localhost:8080/api${endpoint}`, data => {
-                this.renderPageSingle(data, endpoint);
-              });
-            })
-        );
-      brandLabels.addChild(labelElement);
-    });
-    brandEntry.addChild(brandsName)
+    //           const endpoint = event.target.getAttribute("href");
+    //           Api().getRequest(`http://localhost:8080/api${endpoint}`, data => {
+    //             this.renderPageSingle(data, endpoint);
+    //           });
+    //         })
+    //     );
+    //   brandLabels.addChild(labelElement);
+    // });
+    brandEntry.addChild(brandsName);
     brandEntry.addChild(brandDescription);
     currentMainContentContainerContentBlock.replace(brandEntry);
   };
@@ -308,4 +309,4 @@ class Components {
     currentMainContentContainerContentBlock.addChild(labelType);
 
   };
-};
+}

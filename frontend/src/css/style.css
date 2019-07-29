@@ -28,7 +28,8 @@
       flex-direction: row;
       justify-content: space-between;
       align-items: flex-start;
-      background-color: var(--dark);
+      background-color: #000;
+      opacity: .9;
   }
   
   html {
@@ -38,9 +39,13 @@
 
   }
 
-  main {
-      height: 80vh;
-      background-color: var(--light);
+ .main-content {
+      height: 100vh;
+      background-size: cover;
+      background-image: url("./whisky.jpg");
+      color:#fff;
+      opacity: .9;
+      text-transform: uppercase;
   }
 
   .nav-list {
@@ -48,32 +53,32 @@
       flex-direction: row;
       justify-content: space-between;
       align-items: flex-start;
+      list-style: none;
+      margin-top:2rem;
 
+      
   }
 
   .nav-list-item {
-      margin-right: 1rem;
+     margin-right:1rem;
       text-decoration: none;
       list-style: none;
-      color: var(--light)
-     
+      color:#fff; 
+
   }
 
-  .page-subtitle {
-    color: var(--mid);
-  }
 
   .page-title {
-    color: var(--yellow);
+    color: #fff;
+    margin-top: 2rem;
    
     
   }
   .wrapper {
       display: flex;
       flex-direction: column;
-      
-        min-height: 100%;
-  margin-bottom: -50px;
+     min-height: 100%;
+      margin-bottom: -50px;
   }
 
   .main-content-area {
@@ -81,24 +86,14 @@
     text-align: center;
     display:flex;
     flex-direction: row;
-    
-
-  }
-
-
-
-  .main-list-item {
-      font-size: 2rem;
-      padding: 0.5rem;
-
   }
 
   .footer {
-    color: var(--yellow);
-    background-color: var(--dark);
+    color: #fff;
+    background-color: #000;
+    opacity: .9;
+    /* margin-top:2.2rem; */
   }
-
-  .footer,
-.push {
-  height: 100px;
+.type-brand-font{
+  color: #000;
 }
